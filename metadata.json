@@ -1,0 +1,6 @@
+{
+  "name": "SMM Panel",
+  "description": "A premium social media marketing panel for automated growth services, including packages, tracking, secure UPI settlements, and admin controls.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

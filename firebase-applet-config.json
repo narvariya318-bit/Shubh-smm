@@ -1,0 +1,10 @@
+{
+  "projectId": "subah-smm",
+  "appId": "1:514238514443:web:9c0e940b60ae1376fd0e0e",
+  "apiKey": "AIzaSyD3QSJSam3nHYFNq4trgR2PuSbs_zOU7ps",
+  "authDomain": "subah-smm.firebaseapp.com",
+  "databaseURL": "https://subah-smm-default-rtdb.firebaseio.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "subah-smm.firebasestorage.app",
+  "messagingSenderId": "514238514443"
+}

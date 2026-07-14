@@ -1,0 +1,186 @@
+{
+  "entities": {
+    "Settings": {
+      "title": "Website Settings",
+      "description": "Global website configuration options and details.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "logoUrl": { "type": "string" },
+        "homepageBanner": { "type": "string" },
+        "upiId": { "type": "string" },
+        "qrCodeUrl": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "telegramLink": { "type": "string" },
+        "paymentInstructions": { "type": "string" },
+        "announcement": { "type": "string" },
+        "showAnnouncement": { "type": "boolean" },
+        "isMaintenanceMode": { "type": "boolean" },
+        "minDeposit": { "type": "number" },
+        "activeUsersCount": { "type": "string" },
+        "totalOrdersCount": { "type": "string" },
+        "platformNews": { "type": "string" },
+        "flashSaleDuration": { "type": "integer" },
+        "flashSaleTitle": { "type": "string" },
+        "flashSaleDesc": { "type": "string" },
+        "flashSaleHindi": { "type": "string" },
+        "bonusOffer1Amt": { "type": "number" },
+        "bonusOffer1Extra": { "type": "number" },
+        "bonusOffer2Amt": { "type": "number" },
+        "bonusOffer2Extra": { "type": "number" },
+        "bonusOffer3Amt": { "type": "number" },
+        "bonusOffer3Extra": { "type": "number" },
+        "bonusOffer4Amt": { "type": "number" },
+        "bonusOffer4Extra": { "type": "number" },
+        "scratchCard1Win": { "type": "string" },
+        "scratchCard2Win": { "type": "string" },
+        "scratchCard3Win": { "type": "string" },
+        "scratchCard4Win": { "type": "string" }
+      },
+      "required": ["title", "upiId", "isMaintenanceMode"]
+    },
+    "Category": {
+      "title": "Service Category",
+      "description": "Category for classifying different SMM packages.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "icon": { "type": "string" },
+        "sortOrder": { "type": "integer" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "sortOrder", "active"]
+    },
+    "Service": {
+      "title": "SMM Service",
+      "description": "A specific service package offered under a category.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "name": { "type": "string" },
+        "pricePer1000": { "type": "number" },
+        "minQuantity": { "type": "integer" },
+        "maxQuantity": { "type": "integer" },
+        "description": { "type": "string" },
+        "active": { "type": "boolean" },
+        "logoUrl": { "type": "string" }
+      },
+      "required": ["id", "categoryId", "name", "pricePer1000", "minQuantity", "maxQuantity", "active"]
+    },
+    "Order": {
+      "title": "Social Growth Order",
+      "description": "A visitor order placed for automated growth execution.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientName": { "type": "string" },
+        "serviceId": { "type": "string" },
+        "serviceName": { "type": "string" },
+        "categoryId": { "type": "string" },
+        "categoryName": { "type": "string" },
+        "link": { "type": "string" },
+        "quantity": { "type": "integer" },
+        "charge": { "type": "number" },
+        "paymentReference": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Processing", "Completed", "Cancelled"] },
+        "createdAt": { "type": "string" },
+        "remarks": { "type": "string" }
+      },
+      "required": ["id", "serviceId", "serviceName", "categoryId", "categoryName", "link", "quantity", "charge", "paymentReference", "status", "createdAt"]
+    },
+    "Wallet": {
+      "title": "User Wallet",
+      "description": "Stores user or guest wallet balance and details.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "balance": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "balance", "updatedAt"]
+    },
+    "PaymentRequest": {
+      "title": "Payment Deposit Request",
+      "description": "Transaction/UTR request for balance credit verification.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "amount": { "type": "number" },
+        "utr": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Approved", "Rejected"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "userId", "clientName", "amount", "utr", "status", "createdAt"]
+    },
+    "Visit": {
+      "title": "Visitor Log",
+      "description": "Log of unique user visits to SMM Panel.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "visitorId": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "userAgent": { "type": "string" },
+        "ip": { "type": "string" },
+        "deviceName": { "type": "string" },
+        "duration": { "type": "integer" },
+        "pages": { "type": "array" },
+        "lastActive": { "type": "string" }
+      },
+      "required": ["id", "visitorId", "timestamp", "userAgent"]
+    },
+    "Review": {
+      "title": "Customer Feedback Review",
+      "description": "User feedback, comments and star ratings for services.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "rating": { "type": "integer" },
+        "comment": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "ip": { "type": "string" }
+      },
+      "required": ["id", "name", "rating", "comment", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/settings/{settingsId}": {
+      "schema": "Settings",
+      "description": "Global config options for the website."
+    },
+    "/categories/{categoryId}": {
+      "schema": "Category",
+      "description": "Platform categories for classification."
+    },
+    "/services/{serviceId}": {
+      "schema": "Service",
+      "description": "Available service packages."
+    },
+    "/orders/{orderId}": {
+      "schema": "Order",
+      "description": "Dispatched order tracking details."
+    },
+    "/wallets/{walletId}": {
+      "schema": "Wallet",
+      "description": "Track user or guest account wallet balance."
+    },
+    "/payment_requests/{requestId}": {
+      "schema": "PaymentRequest",
+      "description": "Register payment claims via UTR."
+    },
+    "/visits/{visitId}": {
+      "schema": "Visit",
+      "description": "Track website visits/pageviews."
+    },
+    "/reviews/{reviewId}": {
+      "schema": "Review",
+      "description": "Verified client reviews and comments."
+    }
+  }
+}

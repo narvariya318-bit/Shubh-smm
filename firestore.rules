@@ -1,0 +1,74 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Safety Net
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Common Helpers
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    // In this app, only admins log in, guests use localStorage guest IDs
+    function isAdmin() {
+      return isSignedIn();
+    }
+
+    // 1. Settings Collection
+    match /settings/{settingsId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 2. Categories Collection
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 3. Services Collection
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // 4. Orders Collection
+    match /orders/{orderId} {
+      allow read: if isAdmin() || resource == null || resource.data.paymentReference != null;
+      allow create: if true;
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // 5. Wallets Collection
+    match /wallets/{walletId} {
+      allow read, write: if isAdmin() || walletId.matches('^guest-.*') || walletId != '';
+    }
+
+    // 6. Payment Requests Collection
+    match /payment_requests/{requestId} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // 7. Visits/Analytics Collection
+    match /visits/{visitId} {
+      allow read: if isAdmin();
+      allow create, update: if true;
+    }
+
+    // 8. Reviews Collection
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    } match /reviews_deleted/{reviewId} {
+      allow read, write: if false;
+    }
+  }
+}
